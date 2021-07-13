@@ -12,6 +12,11 @@ module.exports = {
     return config
   },
   stories: [
-    '../stories/**/*.tsx'
-  ]
+    '../src/components/**/*.tsx'
+  ],
+  addons: [
+    {
+      name: '@storybook/addon-essentials',
+    },
+  ],
 }
