@@ -1,5 +1,4 @@
-import React from 'react'
-import { Text } from './text'
+import {Text} from './text'
 
 export default {
   title: 'Atoms/Text',

@@ -55,11 +55,12 @@ type TextProps = {
   color?: Color
   size?: Size
   weight?: Weight
+  className?: string
 }
 
-export const Text: FC<TextProps> = ({color = 'neutral-0', size = 'M', weight = 'normal', children}) => {
+export const Text: FC<TextProps> = ({color = 'neutral-0', size = 'M', weight = 'normal', className, children}) => {
   return (
-    <StyledSpan textSize={size} textColor={color} textWeight={weight}>
+    <StyledSpan textSize={size} textColor={color} textWeight={weight} className={className}>
       {children}
     </StyledSpan>
   )
