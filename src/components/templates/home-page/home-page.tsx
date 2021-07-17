@@ -1,11 +1,26 @@
-import {useState} from 'react'
+import {FC, useState} from 'react'
+import styled from 'styled-components'
+import {Filter, Mockups} from '../../organisms'
 
-export const HomePage = () => {
+const StyledFilter = styled(Filter)`
+  margin-bottom: 20px;
+`
+
+const Container = styled.div`
+
+`
+
+type HomePageProps = {
+
+}
+
+export const HomePage: FC<HomePageProps> = () => {
   //
 
   return (
-    <div>
-      ....
-    </div>
+    <Container>
+      <StyledFilter filters={[]} />
+      <Mockups />
+    </Container>
   )
 }

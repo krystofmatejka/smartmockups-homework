@@ -43,6 +43,7 @@ type Filter = {
 
 type FilterProps = {
   filters: Filter[]
+  className?: string
 }
 
 const filters = [
@@ -82,7 +83,7 @@ const filters = [
   },
 ]
 
-export const Filter: FC<FilterProps> = () => {
+export const Filter: FC<FilterProps> = ({className}) => {
   const columns = []
   const perColumn = Math.round(filters.length / 4)
   let counter = 0
@@ -99,7 +100,7 @@ export const Filter: FC<FilterProps> = () => {
   })
 
   return (
-    <StyledContainer>
+    <StyledContainer className={className}>
       {
         columns.map((column) => {
           return (
