@@ -35,13 +35,19 @@ const StyledText = styled(Text)`
   margin: 13px;
 `
 
-export const LabeledImage: FC = () => {
+type LabeledImageProps = {
+  label?: string
+  image?: string
+  className?: string
+}
+
+export const LabeledImage: FC<LabeledImageProps> = ({label, image, className}) => {
   return (
-    <Container>
+    <Container className={className}>
       <HoverArea>
-        <StyledText color='neutral-100'>Man working on macbook</StyledText>
+        <StyledText color='neutral-100'>{label}</StyledText>
       </HoverArea>
-      <Image src={'https://smartmockups-web-assets.imgix.net/mockups/tshDnRIQoN1_pr_en.jpg?h=570&w=760&fit=crop'} alt={'666'}  />
+      <Image src={image} alt={label}  />
     </Container>
   )
 }

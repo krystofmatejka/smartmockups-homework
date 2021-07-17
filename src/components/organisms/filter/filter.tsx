@@ -4,6 +4,9 @@ import {Text} from '../../atoms'
 
 const StyledContainer = styled.div`
   display: flex;
+  border: 1px solid #E1E1E1;
+  border-radius: 4px;
+  padding: 20px 0;
 `
 
 const Column = styled.ul`
@@ -26,7 +29,7 @@ const Column = styled.ul`
   
   & > li {
     padding: 0;
-    margin: 0;
+    margin: 15px 0;
   }
 
   @media (max-width: 640px) { {
@@ -45,6 +48,7 @@ type FilterProps = {
 const filters = [
   {
     name: 'Show all',
+    active: true,
   },
   {
     name: 'Branding',
@@ -104,7 +108,7 @@ export const Filter: FC<FilterProps> = () => {
                 column.map((row) => {
                   return (
                     <li>
-                      <Text>{row.name}</Text>
+                      <Text weight={(row.active) ? 'bold' : 'normal'}>{row.name}</Text>
                     </li>
                   )
                 })
