@@ -1,6 +1,7 @@
 import {FC} from 'react'
 import styled from 'styled-components'
 import {Text} from '../../atoms'
+import {BREAKPOINTS} from '../../..//theme'
 
 const StyledContainer = styled.div`
   display: flex;
@@ -13,7 +14,7 @@ const Column = styled.ul`
   position: relative;
   width: 25%;
   list-style: none;
-  margin: 0 0 0 40px;
+  margin: 0;
   padding: 0;
 
   &:not(:last-child):after {
@@ -28,12 +29,13 @@ const Column = styled.ul`
   }
   
   & > li {
-    padding: 0;
-    margin: 15px 0;
+    margin: 15px 10px 15px 30px;
   }
 
-  @media (max-width: 640px) { {
-    margin: 0 0 0 20px;
+  @media (max-width: ${BREAKPOINTS.M}px) { {
+    & > li {
+      margin: 15px 10px 15px 20px;
+    }
   }
 `
 

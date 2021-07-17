@@ -1,6 +1,7 @@
 import {FC} from 'react'
 import styled from 'styled-components'
 import {LabeledImage} from '../../molecules'
+import {BREAKPOINTS} from '../../../theme'
 
 const Container = styled.div`
   display: flex;
@@ -11,6 +12,14 @@ const Container = styled.div`
 const StyledLabeledImage = styled(LabeledImage)`
   max-width: calc(25% - 15px);
   margin-bottom: 20px;
+
+  @media (max-width: ${BREAKPOINTS.M}px) { {
+    max-width: calc(50% - 15px);
+  }
+
+  @media (max-width: ${BREAKPOINTS.S}px) {
+    max-width: 100%;
+  }
 `
 
 const mockups = [
