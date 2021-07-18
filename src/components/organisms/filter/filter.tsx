@@ -1,10 +1,11 @@
 import {FC} from 'react'
 import styled from 'styled-components'
 import {Text} from '../../atoms'
-import {BREAKPOINTS} from '../../..//theme'
+import {BREAKPOINTS} from '../../../theme'
 
 const StyledContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
   border: 1px solid #E1E1E1;
   border-radius: 4px;
   padding: 20px 0;
@@ -18,7 +19,7 @@ const Column = styled.ul`
   padding: 0;
 
   &:not(:last-child):after {
-    content: "";
+    content: '';
     display: block;
     position: absolute;
     width: 1px;
@@ -27,16 +28,26 @@ const Column = styled.ul`
     top: 0;
     right: 0;
   }
-  
-  & > li {
-    margin: 15px 10px 15px 30px;
-  }
 
-  @media (max-width: ${BREAKPOINTS.M}px) { {
-    & > li {
-      margin: 15px 10px 15px 20px;
+  @media (max-width: ${BREAKPOINTS.M}px) {
+    width: 50%;
+
+    &:nth-child(even):after {
+      display: none;
     }
   }
+
+  @media (max-width: ${BREAKPOINTS.S}px) {
+    width: 100%;
+
+    &:nth-child(odd):after {
+      display: none;
+    }
+  }
+`
+
+const StyledLi = styled.li`
+  margin: 15px 20px;
 `
 
 type Filter = {
@@ -110,9 +121,9 @@ export const Filter: FC<FilterProps> = ({className}) => {
               {
                 column.map((row) => {
                   return (
-                    <li>
+                    <StyledLi>
                       <Text weight={(row.active) ? 'bold' : 'normal'}>{row.name}</Text>
-                    </li>
+                    </StyledLi>
                   )
                 })
               }
