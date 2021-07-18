@@ -77,12 +77,6 @@ const useHomePage = () => {
 export const HomePage: FC = () => {
   const {loading, error, activeCategory, changeCategory, filters, mockups} = useHomePage()
 
-  if (loading) {
-    return (
-      <div>loading...</div>
-    )
-  }
-
   if (error) {
     return (
       <div>Error: ${error}</div>
@@ -91,6 +85,7 @@ export const HomePage: FC = () => {
 
   return (
     <HomePageTemplate
+      loading={loading}
       activeCategory={activeCategory}
       handleClickFilter={changeCategory}
       filters={filters}

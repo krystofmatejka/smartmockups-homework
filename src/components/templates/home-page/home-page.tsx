@@ -1,19 +1,9 @@
-import {FC, useState} from 'react'
+import {FC} from 'react'
 import styled from 'styled-components'
 import {Filter, Mockups} from '../../organisms'
-import {BREAKPOINTS} from '../../../theme'
 
 const StyledFilter = styled(Filter)`
   margin-bottom: 20px;
-`
-
-const Container = styled.div`
-  max-width: 1055px;
-  margin: 30px;
-
-  @media (max-width: ${BREAKPOINTS.M}px) { {
-    margin: 15px;
-  }
 `
 
 type Filter = {
@@ -28,17 +18,18 @@ type Mockup = {
 }
 
 type HomePageProps = {
+  loading: boolean
   activeCategory: string
   handleClickFilter: (slug: string) => void
   filters: Filter[]
   mockups: Mockup[]
 }
 
-export const HomePage: FC<HomePageProps> = ({activeCategory, handleClickFilter, filters, mockups }) => {
+export const HomePage: FC<HomePageProps> = ({loading, activeCategory, handleClickFilter, filters, mockups }) => {
   return (
-    <Container>
-      <StyledFilter activeCategory={activeCategory} handleClickFilter={handleClickFilter} filters={filters} />
+    <>
+      <StyledFilter loading={loading} activeCategory={activeCategory} handleClickFilter={handleClickFilter} filters={filters} />
       <Mockups mockups={mockups} />
-    </Container>
+    </>
   )
 }

@@ -1,6 +1,7 @@
 import React from 'react'
 import Head from 'next/head'
-import {createGlobalStyle} from 'styled-components'
+import styled, {createGlobalStyle} from 'styled-components'
+import {BREAKPOINTS} from '../theme'
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -9,6 +10,15 @@ const GlobalStyle = createGlobalStyle`
     background: #fff;
 
     font-family: 'Montserrat', sans-serif;
+  }
+`
+
+const Container = styled.div`
+  max-width: 1055px;
+  margin: 30px;
+
+  @media (max-width: ${BREAKPOINTS.M}px) { {
+    margin: 15px;
   }
 `
 
@@ -21,7 +31,9 @@ const SpringApp = ({Component, pageProps}) => {
         <link href='https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap' rel='stylesheet'/>
       </Head>
       <GlobalStyle/>
-      <Component {...pageProps} />
+      <Container>
+        <Component {...pageProps} />
+      </Container>
     </>
   )
 }
