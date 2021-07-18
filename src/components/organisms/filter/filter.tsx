@@ -46,11 +46,11 @@ const Column = styled.ul`
   }
 `
 
-const StyledLi = styled.li<{loading?: boolean}>`
+const StyledLi = styled.li<{showZeroState?: boolean}>`
   margin: 15px 20px;
   height: 19px;
 
-  background: ${(p) => (p.loading) ? 'linear-gradient(270deg, #eee, #dcdcdc)' : 'none'};
+  background: ${(p) => (p.showZeroState) ? 'linear-gradient(270deg, #eee, #dcdcdc)' : 'none'};
   background-size: 400% 400%;
   animation: AnimationName 2s ease infinite;
 
@@ -121,7 +121,7 @@ export const Filter: FC<FilterProps> = ({loading, activeCategory, filters, class
                       <Text weight={(row.slug === activeCategory) ? 'bold' : 'normal'}
                         onClick={() => handleClickFilter(row.slug)}>{row.title}</Text>
                     </StyledLi>
-                  ) : (<StyledLi key={index} loading={loading}/>)
+                  ) : (<StyledLi key={index} showZeroState={loading}/>)
                 })
               }
             </Column>

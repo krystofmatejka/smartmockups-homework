@@ -10,50 +10,22 @@ const Container = styled.div`
 `
 
 const StyledLabeledImage = styled(LabeledImage)`
-  max-width: calc(25% - 15px);
+  width: calc(25% - 15px);
   margin-bottom: 20px;
 
   @media (max-width: ${BREAKPOINTS.M}px) { {
-    max-width: calc(50% - 15px);
+    width: calc(50% - 15px);
   }
 
   @media (max-width: ${BREAKPOINTS.S}px) {
-    max-width: 100%;
+    width: 100%;
   }
 `
-
-/*const mockups = [
-  {
-    id: 'Ao3176YQZE',
-    title: 'Branding near the notepad and a duck tape',
-    image: 'https://smartmockups-web-assets.imgix.net/mockups/Ao3176YQZE_pr_en.jpg?h=570&w=760&fit=crop',
-  },
-  {
-    id: '5mrGHiisy',
-    title: 'iMac on the wooden desk with Magic Keyboard, Magic Mouse and iPad',
-    image: 'https://smartmockups-web-assets.imgix.net/mockups/5mrGHiisy_pr_en.jpg?h=570&w=760&fit=crop',
-  },
-  {
-    id: 'tshDnRIQoN1',
-    title: 'iPhone 11 in the hands of a woman with decorated nails',
-    image: 'https://smartmockups-web-assets.imgix.net/mockups/tshDnRIQoN1_pr_en.jpg?h=570&w=760&fit=crop',
-  },
-  {
-    id: 'FmB4UDqU0g',
-    title: 'MacBook Pro with iPhone 11 Pro in the hands of a man',
-    image: 'https://smartmockups-web-assets.imgix.net/mockups/FmB4UDqU0g_pr_en.jpg?h=570&w=760&fit=crop',
-  },
-  {
-    id: 'FmB4UDqU0g',
-    title: 'MacBook Pro with iPhone 11 Pro in the hands of a man',
-    image: 'https://smartmockups-web-assets.imgix.net/mockups/FmB4UDqU0g_pr_en.jpg?h=570&w=760&fit=crop',
-  },
-]*/
 
 type Mockup = {
   id: string
   title: string
-  thumb: string
+  thumb?: string
 }
 
 type MockupsProps = {
@@ -61,9 +33,17 @@ type MockupsProps = {
 }
 
 export const Mockups: FC<MockupsProps> = ({mockups}) => {
+  const m = [...mockups]
+  while (m.length < 8) {
+    m.push({
+      id: Math.random().toString(),
+      title: '',
+    })
+  }
+
   return (
     <Container>
-      {mockups.map((mockup) => (
+      {m.map((mockup) => (
         <StyledLabeledImage key={mockup.id} label={mockup.title} image={mockup.thumb} />
       ))}
     </Container>

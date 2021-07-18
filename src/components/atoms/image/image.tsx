@@ -9,13 +9,23 @@ const StyledImage = styled.img`
   height: auto;
 `
 
+const ZeroState = styled.div`
+  background: url('${GRAY_PIXEL}');
+  width: 100%;
+  border-radius: 4px;
+  padding-bottom: 75%;
+  height: auto;
+`
+
 type ImageProps = {
   src?: string
   alt: string
 }
 
 export const Image: FC<ImageProps> = ({src, alt}) => {
-  return (
-    <StyledImage src={(src) ? src : GRAY_PIXEL} alt={alt} />
+  return (src) ? (
+    <StyledImage src={src} alt={alt} />
+  ) : (
+    <ZeroState />
   )
 }
