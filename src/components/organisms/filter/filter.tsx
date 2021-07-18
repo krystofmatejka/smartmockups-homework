@@ -56,48 +56,13 @@ type Filter = {
 }
 
 type FilterProps = {
+  activeCategory: string
   filters: Filter[]
   className?: string
+  handleClickFilter: (slug: string) => void
 }
 
-/*const filters = [
-  {
-    name: 'Show all',
-    active: true,
-  },
-  {
-    name: 'Branding',
-  },
-  {
-    name: 'Desktop',
-  },
-  {
-    name: 'E-learning bundles',
-  },
-  {
-    name: 'Frames',
-  },
-  {
-    name: 'Garmet-only T-shirts',
-  },
-  {
-    name: 'Iphone X',
-  },
-  {
-    name: 'Multiple devices',
-  },
-  {
-    name: 'Posters',
-  },
-  {
-    name: 'Sweatshirts',
-  },
-  {
-    name: 'T-shirts',
-  },
-]*/
-
-export const Filter: FC<FilterProps> = ({filters, className}) => {
+export const Filter: FC<FilterProps> = ({activeCategory, filters, className, handleClickFilter}) => {
   const columns = []
   const perColumn = Math.round(filters.length / 4)
   let counter = 0
@@ -116,14 +81,14 @@ export const Filter: FC<FilterProps> = ({filters, className}) => {
   return (
     <StyledContainer className={className}>
       {
-        columns.map((column) => {
+        columns.map((column, index) => {
           return (
-            <Column>
+            <Column key={index}>
               {
                 column.map((row) => {
                   return (
-                    <StyledLi>
-                      <Text weight={(row.active) ? 'bold' : 'normal'}>{row.title}</Text>
+                    <StyledLi key={row.slug}>
+                      <Text weight={(row.slug === activeCategory) ? 'bold' : 'normal'} onClick={() => handleClickFilter(row.slug)}>{row.title}</Text>
                     </StyledLi>
                   )
                 })

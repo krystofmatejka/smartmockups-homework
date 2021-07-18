@@ -56,11 +56,12 @@ type TextProps = {
   size?: Size
   weight?: Weight
   className?: string
+  onClick?: () => void
 }
 
-export const Text: FC<TextProps> = ({color = 'neutral-0', size = 'M', weight = 'normal', className, children}) => {
+export const Text: FC<TextProps> = ({color = 'neutral-0', size = 'M', weight = 'normal', className, onClick, children}) => {
   return (
-    <StyledSpan textSize={size} textColor={color} textWeight={weight} className={className}>
+    <StyledSpan textSize={size} textColor={color} textWeight={weight} className={className} onClick={onClick}>
       {children}
     </StyledSpan>
   )

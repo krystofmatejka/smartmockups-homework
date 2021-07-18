@@ -22,14 +22,16 @@ type Mockup = {
 }
 
 type HomePageProps = {
+  activeCategory: string
+  handleClickFilter: (slug: string) => void
   filters: Filter[]
   mockups: Mockup[]
 }
 
-export const HomePage: FC<HomePageProps> = ({filters, mockups}) => {
+export const HomePage: FC<HomePageProps> = ({activeCategory, handleClickFilter, filters, mockups }) => {
   return (
     <Container>
-      <StyledFilter filters={filters} />
+      <StyledFilter activeCategory={activeCategory} handleClickFilter={handleClickFilter} filters={filters} />
       <Mockups mockups={mockups} />
     </Container>
   )

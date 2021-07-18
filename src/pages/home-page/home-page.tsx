@@ -6,6 +6,7 @@ type State = {
   loading: boolean
   error?: string
   data: any
+  activeCategory: string
 }
 
 type Action =
@@ -21,12 +22,21 @@ const reducer = (state: State, action: Action): State => {
       loading: false,
       error: undefined,
       data: action.payload,
+      activeCategory: state.activeCategory,
     }
   case 'SET_ERROR':
     return {
       loading: false,
       error: action.payload,
       data: undefined,
+      activeCategory: state.activeCategory,
+    }
+  case 'CHANGE_CATEGORY':
+    return {
+      loading: state.loading,
+      error: state.error,
+      data: state.data,
+      activeCategory: action.payload,
     }
   default:
     return INITIAL_STATE
@@ -36,13 +46,15 @@ const reducer = (state: State, action: Action): State => {
 const INITIAL_STATE = {
   loading: true,
   error: undefined,
-  data: {},
+  data: null,
+  activeCategory: 'show-all',
 }
 
 const useHomePage = () => {
-  const [{loading, error, data}, dispatch] = useReducer(reducer, INITIAL_STATE)
+  const [{loading, error, data, activeCategory}, dispatch] = useReducer(reducer, INITIAL_STATE)
   const setError = (error: any) => dispatch({type: 'SET_ERROR', payload: error})
   const setData = (data: any) => dispatch({type: 'SET_DATA', payload: data})
+  const changeCategory = (slug: string) => dispatch({type: 'CHANGE_CATEGORY', payload: slug})
 
   useEffect(() => {
     fetchData().then((data) => {
@@ -55,12 +67,15 @@ const useHomePage = () => {
   return {
     loading,
     error,
-    data,
+    activeCategory,
+    changeCategory,
+    filters: data ? [...data.values()] : [],
+    mockups: (data) ? [...data.get(activeCategory).mockups.values()] : [],
   }
 }
 
 export const HomePage: FC = () => {
-  const {loading, error, data} = useHomePage()
+  const {loading, error, activeCategory, changeCategory, filters, mockups} = useHomePage()
 
   if (loading) {
     return (
@@ -74,22 +89,10 @@ export const HomePage: FC = () => {
     )
   }
 
-  const active = 'desktop'
-
-  const filters = []
-  let mockups = []
-
-  for (const [key, value] of data) {
-    console.log(value)
-    filters.push(value)
-    if (key === active) {
-      mockups = value.mockups
-    }
-  }
-
-  console.log(data)
   return (
     <HomePageTemplate
+      activeCategory={activeCategory}
+      handleClickFilter={changeCategory}
       filters={filters}
       mockups={mockups}
     />
