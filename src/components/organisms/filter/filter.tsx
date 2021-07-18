@@ -51,7 +51,8 @@ const StyledLi = styled.li`
 `
 
 type Filter = {
-  name: string
+  slug: string
+  title: string
 }
 
 type FilterProps = {
@@ -59,7 +60,7 @@ type FilterProps = {
   className?: string
 }
 
-const filters = [
+/*const filters = [
   {
     name: 'Show all',
     active: true,
@@ -94,9 +95,9 @@ const filters = [
   {
     name: 'T-shirts',
   },
-]
+]*/
 
-export const Filter: FC<FilterProps> = ({className}) => {
+export const Filter: FC<FilterProps> = ({filters, className}) => {
   const columns = []
   const perColumn = Math.round(filters.length / 4)
   let counter = 0
@@ -122,7 +123,7 @@ export const Filter: FC<FilterProps> = ({className}) => {
                 column.map((row) => {
                   return (
                     <StyledLi>
-                      <Text weight={(row.active) ? 'bold' : 'normal'}>{row.name}</Text>
+                      <Text weight={(row.active) ? 'bold' : 'normal'}>{row.title}</Text>
                     </StyledLi>
                   )
                 })

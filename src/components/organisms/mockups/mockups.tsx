@@ -22,7 +22,7 @@ const StyledLabeledImage = styled(LabeledImage)`
   }
 `
 
-const mockups = [
+/*const mockups = [
   {
     id: 'Ao3176YQZE',
     title: 'Branding near the notepad and a duck tape',
@@ -48,13 +48,23 @@ const mockups = [
     title: 'MacBook Pro with iPhone 11 Pro in the hands of a man',
     image: 'https://smartmockups-web-assets.imgix.net/mockups/FmB4UDqU0g_pr_en.jpg?h=570&w=760&fit=crop',
   },
-]
+]*/
 
-export const Mockups: FC = () => {
+type Mockup = {
+  id: string
+  title: string
+  thumb: string
+}
+
+type MockupsProps = {
+  mockups: Mockup[]
+}
+
+export const Mockups: FC<MockupsProps> = ({mockups}) => {
   return (
     <Container>
       {mockups.map((mockup) => (
-        <StyledLabeledImage key={mockup.id} label={mockup.title} image={mockup.image} />
+        <StyledLabeledImage key={mockup.id} label={mockup.title} image={mockup.thumb} />
       ))}
     </Container>
   )

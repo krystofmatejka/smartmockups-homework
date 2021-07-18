@@ -10,17 +10,27 @@ const Container = styled.div`
 
 `
 
-type HomePageProps = {
-
+type Filter = {
+  slug: string
+  title: string
 }
 
-export const HomePage: FC<HomePageProps> = () => {
-  //
+type Mockup = {
+  id: string
+  title: string
+  thumb: string
+}
 
+type HomePageProps = {
+  filters: Filter[]
+  mockups: Mockup[]
+}
+
+export const HomePage: FC<HomePageProps> = ({filters, mockups}) => {
   return (
     <Container>
-      <StyledFilter filters={[]} />
-      <Mockups />
+      <StyledFilter filters={filters} />
+      <Mockups mockups={mockups} />
     </Container>
   )
 }
