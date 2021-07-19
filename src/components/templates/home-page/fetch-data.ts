@@ -85,8 +85,10 @@ const deleteEmptyCategories = (categories: Map<string, Category>) => {
 }
 
 export const fetchData = async () => {
-  const categories = await fetchCategories()
-  const mockups = await fetchMockups()
+  const [categories, mockups] = await Promise.all([
+    fetchCategories(),
+    fetchMockups(),
+  ])
 
   addMockupsToCategories(mockups, categories)
   deleteEmptyCategories(categories)
