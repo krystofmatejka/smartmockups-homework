@@ -1,7 +1,7 @@
 import {getRequest} from '../../lib'
 import type {Category, Mockup} from '../../types'
 
-const SHOW_ALL_KEY = 'show-all'
+export const SHOW_ALL_KEY = 'show-all'
 
 const serializeSlug = (slug: string) => slug.replace(/_/g, '-')
 
@@ -57,8 +57,6 @@ const isMockupValid = (mockup: any) => (
 
 const fetchMockups = async () => {
   const rawMockups = await getRequest(process.env.NEXT_PUBLIC_API_MOCKUPS)
-
-  console.log(rawMockups)
 
   return (Array.isArray(rawMockups)) ? rawMockups.filter((mockup) => isMockupValid(mockup)) : [] as Mockup[]
 }

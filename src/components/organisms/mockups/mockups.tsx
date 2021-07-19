@@ -2,6 +2,7 @@ import {FC} from 'react'
 import styled from 'styled-components'
 import {LabeledImage} from '../../molecules'
 import {BREAKPOINTS} from '../../../theme'
+import type {Mockup} from '../../../types'
 
 const Container = styled.div`
   display: flex;
@@ -22,10 +23,19 @@ const StyledLabeledImage = styled(LabeledImage)`
   }
 `
 
-type Mockup = {
-  id: string
-  title: string
-  thumb?: string
+const addMockupsToMinNumber = (mockups: Mockup[]) => {
+  const result = [...mockups]
+
+  while (result.length < 8) {
+    result.push({
+      id: Math.random().toString(),
+      title: '',
+      thumb: '',
+      category: [],
+    })
+  }
+
+  return result
 }
 
 type MockupsProps = {
@@ -33,17 +43,11 @@ type MockupsProps = {
 }
 
 export const Mockups: FC<MockupsProps> = ({mockups}) => {
-  const m = [...mockups]
-  while (m.length < 8) {
-    m.push({
-      id: Math.random().toString(),
-      title: '',
-    })
-  }
+  const filledMockups = addMockupsToMinNumber(mockups)
 
   return (
     <Container>
-      {m.map((mockup) => (
+      {filledMockups.map((mockup) => (
         <StyledLabeledImage key={mockup.id} label={mockup.title} image={mockup.thumb} />
       ))}
     </Container>

@@ -1,19 +1,20 @@
 import {FC, useEffect, useReducer} from 'react'
 import {HomePage as HomePageTemplate} from '../../components/templates'
-import {fetchData} from './fetch-data'
+import {fetchData, SHOW_ALL_KEY} from './fetch-data'
+import type {Category} from '../../types'
 
 type State = {
   loading: boolean
   error?: string
-  data: any
+  data?: Map<string, Category>
   activeCategory: string
 }
 
 type Action =
   | {type: 'SET_LOADING'}
   | {type: 'SET_ERROR', payload: any}
-  | {type: 'SET_DATA', payload: any}
-  | {type: 'CHANGE_CATEGORY', payload: any}
+  | {type: 'SET_DATA', payload: Map<string, Category>}
+  | {type: 'CHANGE_CATEGORY', payload: string}
 
 const reducer = (state: State, action: Action): State => {
   switch (action.type) {
@@ -46,22 +47,18 @@ const reducer = (state: State, action: Action): State => {
 const INITIAL_STATE = {
   loading: true,
   error: undefined,
-  data: null,
-  activeCategory: 'show-all',
+  data: undefined,
+  activeCategory: SHOW_ALL_KEY,
 }
 
 const useHomePage = () => {
   const [{loading, error, data, activeCategory}, dispatch] = useReducer(reducer, INITIAL_STATE)
   const setError = (error: any) => dispatch({type: 'SET_ERROR', payload: error})
-  const setData = (data: any) => dispatch({type: 'SET_DATA', payload: data})
+  const setData = (data: Map<string, Category>) => dispatch({type: 'SET_DATA', payload: data})
   const changeCategory = (slug: string) => dispatch({type: 'CHANGE_CATEGORY', payload: slug})
 
   useEffect(() => {
-    fetchData().then((data) => {
-      setData(data)
-    }).catch((error) => {
-      setError(error)
-    })
+    fetchData().then((data) => setData(data)).catch((error) => setError(error))
   }, [])
 
   return {
@@ -69,13 +66,13 @@ const useHomePage = () => {
     error,
     activeCategory,
     changeCategory,
-    filters: data ? [...data.values()] : [],
+    categories: (data) ? [...data.values()] : [],
     mockups: (data) ? [...data.get(activeCategory).mockups.values()] : [],
   }
 }
 
 export const HomePage: FC = () => {
-  const {loading, error, activeCategory, changeCategory, filters, mockups} = useHomePage()
+  const {loading, error, activeCategory, changeCategory, categories, mockups} = useHomePage()
 
   if (error) {
     return (
@@ -88,7 +85,7 @@ export const HomePage: FC = () => {
       loading={loading}
       activeCategory={activeCategory}
       handleClickFilter={changeCategory}
-      filters={filters}
+      categories={categories}
       mockups={mockups}
     />
   )
