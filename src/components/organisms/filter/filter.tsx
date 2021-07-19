@@ -67,6 +67,10 @@ const StyledLi = styled.li<{showZeroState?: boolean}>`
   }
 `
 
+const StyledText = styled(Text)`
+  cursor: pointer;
+`
+
 type Filter = {
   slug: string
   title: string
@@ -118,8 +122,8 @@ export const Filter: FC<FilterProps> = ({loading, activeCategory, filters, class
                 column.map((row, index) => {
                   return (row) ? (
                     <StyledLi key={row.slug}>
-                      <Text weight={(row.slug === activeCategory) ? 'bold' : 'normal'}
-                        onClick={() => handleClickFilter(row.slug)}>{row.title}</Text>
+                      <StyledText weight={(row.slug === activeCategory) ? 'bold' : 'normal'}
+                        onClick={() => handleClickFilter(row.slug)}>{row.title}</StyledText>
                     </StyledLi>
                   ) : (<StyledLi key={index} showZeroState={loading}/>)
                 })
