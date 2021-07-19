@@ -24,9 +24,9 @@ const StyledLabeledImage = styled(LabeledImage)`
 `
 
 const addMockupsToMinNumber = (mockups: Mockup[]) => {
-  const result = [...mockups]
+  const result = []
 
-  while (result.length < 8) {
+  while (result.length + mockups.length < 8) {
     result.push({
       id: Math.random().toString(),
       title: '',
@@ -35,7 +35,7 @@ const addMockupsToMinNumber = (mockups: Mockup[]) => {
     })
   }
 
-  return result
+  return mockups.concat(result)
 }
 
 type MockupsProps = {
