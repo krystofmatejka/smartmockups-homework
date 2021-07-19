@@ -1,5 +1,5 @@
 {
-  "name": "next-template",
+  "name": "smartmockups-homework",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -12,15 +12,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kxmatejka/next-template.git"
+    "url": "git+https://github.com/kxmatejka/smartmockups-homework.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/kxmatejka/next-template/issues"
+    "url": "https://github.com/kxmatejka/smartmockups-homework/issues"
   },
-  "homepage": "https://github.com/kxmatejka/next-template#readme",
+  "homepage": "https://github.com/kxmatejka/smartmockups-homework#readme",
   "dependencies": {
     "next": "^11.0.1",
     "react": "^17.0.2",
