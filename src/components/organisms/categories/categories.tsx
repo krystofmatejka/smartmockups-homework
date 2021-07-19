@@ -102,10 +102,10 @@ type CategoriesProps = {
   activeCategory: string
   categories: Category[]
   className?: string
-  handleClickFilter: (slug: string) => void
+  onClick: (slug: string) => void
 }
 
-export const Categories: FC<CategoriesProps> = ({loading, activeCategory, categories, className, handleClickFilter}) => {
+export const Categories: FC<CategoriesProps> = ({loading, activeCategory, categories, className, onClick}) => {
   const columns = (loading) ? generateZeroState() : group(categories)
 
   return (
@@ -119,7 +119,7 @@ export const Categories: FC<CategoriesProps> = ({loading, activeCategory, catego
                   <StyledLi key={row.slug}>
                     <StyledText
                       weight={(row.slug === activeCategory) ? 'bold' : 'normal'}
-                      onClick={() => handleClickFilter(row.slug)}
+                      onClick={() => onClick(row.slug)}
                     >
                       {row.title}
                     </StyledText>

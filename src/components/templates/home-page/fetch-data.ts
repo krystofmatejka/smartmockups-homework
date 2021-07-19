@@ -1,5 +1,5 @@
-import {getRequest} from '../../lib'
-import type {Category, Mockup} from '../../types'
+import {getRequest} from '../../../lib'
+import type {Category, Mockup} from '../../../types'
 
 export const SHOW_ALL_KEY = 'show-all'
 
