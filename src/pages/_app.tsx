@@ -15,10 +15,11 @@ const GlobalStyle = createGlobalStyle`
 
 const Container = styled.div`
   max-width: 1055px;
-  margin: 30px;
+  margin: 0 auto;
+  padding: 30px;
 
   @media (max-width: ${BREAKPOINTS.M}px) { {
-    margin: 15px;
+    padding: 15px;
   }
 `
 

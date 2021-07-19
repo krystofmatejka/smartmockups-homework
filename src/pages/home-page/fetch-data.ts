@@ -3,7 +3,7 @@ import {getRequest} from '../../lib'
 const serializeSlug = (slug: string) => slug.replace(/_/g, '-')
 
 export const fetchData = async () => {
-  const categories = await getRequest('https://5lt31zvq40.execute-api.us-east-1.amazonaws.com/dev/categories')
+  const categories = await getRequest(process.env.NEXT_PUBLIC_API_CATEGORIES)
 
   const result = new Map()
   result.set('show-all', {
@@ -25,7 +25,7 @@ export const fetchData = async () => {
 
   flattenCategories(categories, result)
 
-  const mockups = await getRequest('https://5lt31zvq40.execute-api.us-east-1.amazonaws.com/dev/mockups')
+  const mockups = await getRequest(process.env.NEXT_PUBLIC_API_MOCKUPS)
 
   const all = result.get('show-all')
 
