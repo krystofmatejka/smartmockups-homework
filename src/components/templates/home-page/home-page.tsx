@@ -1,9 +1,9 @@
 import {FC} from 'react'
 import styled from 'styled-components'
-import {Filter, Mockups} from '../../organisms'
+import {Categories, Mockups} from '../../organisms'
 import type {Category, Mockup} from '../../../types'
 
-const StyledFilter = styled(Filter)`
+const StyledCategories = styled(Categories)`
   margin-bottom: 20px;
 `
 
@@ -18,7 +18,12 @@ type HomePageProps = {
 export const HomePage: FC<HomePageProps> = ({loading, activeCategory, handleClickFilter, categories, mockups }) => {
   return (
     <>
-      <StyledFilter loading={loading} activeCategory={activeCategory} handleClickFilter={handleClickFilter} filters={categories} />
+      <StyledCategories
+        loading={loading}
+        activeCategory={activeCategory}
+        handleClickFilter={handleClickFilter}
+        categories={categories}
+      />
       <Mockups mockups={mockups} />
     </>
   )

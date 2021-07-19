@@ -2,6 +2,7 @@ import {FC} from 'react'
 import styled from 'styled-components'
 import {Text} from '../../atoms'
 import {BREAKPOINTS} from '../../../theme'
+import type {Category} from '../../../types'
 
 const StyledContainer = styled.div`
   display: flex;
@@ -71,25 +72,12 @@ const StyledText = styled(Text)`
   cursor: pointer;
 `
 
-type Filter = {
-  slug: string
-  title: string
-}
-
-type FilterProps = {
-  loading: boolean
-  activeCategory: string
-  filters: Filter[]
-  className?: string
-  handleClickFilter: (slug: string) => void
-}
-
-const groupFilters = (filters: any[]) => {
+const group = (categories: Category[]) => {
   const columns = []
-  const perColumn = Math.round(filters.length / 4)
+  const perColumn = Math.round(categories.length / 4)
   let counter = 0
 
-  filters.forEach((filter, index) => {
+  categories.forEach((filter, index) => {
     if (!columns[counter]) {
       columns[counter] = []
     }
@@ -103,14 +91,22 @@ const groupFilters = (filters: any[]) => {
   return columns
 }
 
-const generateZeroStateFilters = () => {
+const generateZeroState = () => {
   const emptyArray = new Array(11).fill(false)
 
-  return groupFilters(emptyArray)
+  return group(emptyArray)
 }
 
-export const Filter: FC<FilterProps> = ({loading, activeCategory, filters, className, handleClickFilter}) => {
-  const columns = (loading) ? generateZeroStateFilters() : groupFilters(filters)
+type CategoriesProps = {
+  loading: boolean
+  activeCategory: string
+  categories: Category[]
+  className?: string
+  handleClickFilter: (slug: string) => void
+}
+
+export const Categories: FC<CategoriesProps> = ({loading, activeCategory, categories, className, handleClickFilter}) => {
+  const columns = (loading) ? generateZeroState() : group(categories)
 
   return (
     <StyledContainer className={className}>
@@ -119,14 +115,18 @@ export const Filter: FC<FilterProps> = ({loading, activeCategory, filters, class
           return (
             <Column key={index}>
               {
-                column.map((row, index) => {
-                  return (row) ? (
-                    <StyledLi key={row.slug}>
-                      <StyledText weight={(row.slug === activeCategory) ? 'bold' : 'normal'}
-                        onClick={() => handleClickFilter(row.slug)}>{row.title}</StyledText>
-                    </StyledLi>
-                  ) : (<StyledLi key={index} showZeroState={loading}/>)
-                })
+                column.map((row, index) => (row) ? (
+                  <StyledLi key={row.slug}>
+                    <StyledText
+                      weight={(row.slug === activeCategory) ? 'bold' : 'normal'}
+                      onClick={() => handleClickFilter(row.slug)}
+                    >
+                      {row.title}
+                    </StyledText>
+                  </StyledLi>
+                ) : (
+                  <StyledLi key={index} showZeroState={loading}/>
+                ))
               }
             </Column>
           )
